@@ -1,18 +1,12 @@
-import Hero from '@/components/custom/Hero'
-
+import React from 'react'
+import { RouterProvider } from '@tanstack/react-router'
 import { createRouter } from '@tanstack/react-router'
-import { routeTree } from '@/routeTree.gen';
-import { RouterProvider } from '@tanstack/react-router';
+import { routeTree } from '@/routeTree.gen'
 
-const router=createRouter({routeTree});
+const router = createRouter({ routeTree })
 
 function App() {
-  return (
-  <>
-    <Hero/>
-    <RouterProvider router={router} />
-  </>
-)
+  return <RouterProvider router={router} />
 }
 
-export default App;
+export default App

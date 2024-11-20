@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as CreateTripImport } from './routes/CreateTrip'
+import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
 
@@ -21,10 +22,23 @@ const CreateTripRoute = CreateTripImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const IndexRoute = IndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
     '/CreateTrip': {
       id: '/CreateTrip'
       path: '/CreateTrip'
@@ -38,32 +52,37 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/CreateTrip': typeof CreateTripRoute
 }
 
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/CreateTrip': typeof CreateTripRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
+  '/': typeof IndexRoute
   '/CreateTrip': typeof CreateTripRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/CreateTrip'
+  fullPaths: '/' | '/CreateTrip'
   fileRoutesByTo: FileRoutesByTo
-  to: '/CreateTrip'
-  id: '__root__' | '/CreateTrip'
+  to: '/' | '/CreateTrip'
+  id: '__root__' | '/' | '/CreateTrip'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   CreateTripRoute: typeof CreateTripRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   CreateTripRoute: CreateTripRoute,
 }
 
@@ -77,8 +96,12 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.jsx",
       "children": [
+        "/",
         "/CreateTrip"
       ]
+    },
+    "/": {
+      "filePath": "index.jsx"
     },
     "/CreateTrip": {
       "filePath": "CreateTrip.jsx"
