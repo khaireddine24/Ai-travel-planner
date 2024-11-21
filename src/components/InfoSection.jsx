@@ -1,13 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Send } from 'lucide-react';
 import { Button } from './ui/button';
+import { Link } from '@tanstack/react-router';
+import axios from 'axios';
 
 const InfoSection = ({ trip }) => {
+  const [destinationImage, setDestinationImage] = useState('/travel-plane.jpg');
+
+  useEffect(() => {
+    const fetchDestinationImage = async () => {
+      try {
+        const destination = trip?.userSelection?.destination?.label;
+        if (!destination) return;
+
+        const response = await axios.get('https://api.unsplash.com/search/photos', {
+          params: {
+            query: destination,
+            client_id: import.meta.env.VITE_UNSPLASH_ACCESS_KEY,
+            per_page: 1
+          }
+        });
+
+        if (response.data.results.length > 0) {
+          setDestinationImage(response.data.results[0].urls.regular);
+        }
+      } catch (error) {
+        console.error('Error fetching destination image:', error);
+        setDestinationImage('/travel-plane.jpg');
+      }
+    };
+
+    fetchDestinationImage();
+  }, [trip?.userSelection?.destination?.label]);
+
   return (
     <>
       <img
-        src="/travel-plane.jpg"
-        className="h-[340px] w-full object-cover rounded-xl"
+        src={destinationImage}
+        className="h-[340px] w-full object-cover rounded-xl hover:scale-110 transition-all"
+        alt={trip?.userSelection?.destination?.label}
       />
 
       <div className="flex justify-between items-center">
@@ -28,9 +59,11 @@ const InfoSection = ({ trip }) => {
             </h2>
           </div>
         </div>
-        <Button>
-          <Send />
-        </Button>
+        <Link to={`https://www.google.com/maps/search/?api=1&query=${trip?.userSelection?.destination?.label}`} target='_blank'>
+          <Button>
+            <Send />
+          </Button>
+        </Link>
       </div>
     </>
   );

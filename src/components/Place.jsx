@@ -23,9 +23,9 @@ const Place = ({ trip }) => {
         <div key={index}>
           <h3 className="text-xl font-semibold text-gray-700 mb-4">{day}</h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {details.Plan.map((place, idx) => (
-              <PlaceCardItem key={idx} place={place} />
+          <div className="grid lg:grid-cols-2 sm:grid-cols-3 gap-6">
+            {details.Plan.map((place, index) => (
+              <PlaceCardItem key={index} place={place} />
             ))}
           </div>
         </div>

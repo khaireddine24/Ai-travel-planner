@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ClerkProvider } from '@clerk/clerk-react'
 import { shadesOfPurple } from '@clerk/themes';
 import { Toaster } from 'sonner';
+import ErrorBoundary from './error/ErrorBoundary';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,8 +30,10 @@ createRoot(document.getElementById('root')).render(
         }}
       >
         <QueryClientProvider client={queryClient}>
-          <App />
-          <Toaster/>
+          <ErrorBoundary>
+            <App />
+            <Toaster position='top-center'/>
+          </ErrorBoundary>
         </QueryClientProvider>
       </ClerkProvider>
   </StrictMode>,

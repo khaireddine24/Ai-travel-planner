@@ -1,13 +1,13 @@
-import React,{useState,useEffect} from 'react'
-import { createFileRoute, useParams,useNavigate,Link } from '@tanstack/react-router'
+import React, { useState, useEffect } from 'react'
+import { createFileRoute, useParams, useNavigate, Link } from '@tanstack/react-router'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '@/service/firebaseConfig'
-import { Button } from '@/components/ui/button'
-import { Loader } from 'lucide-react'
+import { Loader} from 'lucide-react'
 import { toast } from 'sonner'
 import InfoSection from '@/components/InfoSection'
 import Hotels from '@/components/Hotels'
 import Place from '@/components/Place'
+import Footer from '@/custom/Footer'
 
 export const Route = createFileRoute('/ViewTrip/$tripId/')({
   component: ViewTrip,
@@ -45,8 +45,9 @@ function ViewTrip() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <Loader className="animate-spin w-12 h-12" />
+      <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
+        <Loader className="animate-spin w-12 h-12 text-blue-500" />
+        <p className="mt-4 text-gray-600">Loading your trip details...</p>
       </div>
     )
   }
@@ -56,22 +57,23 @@ function ViewTrip() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-2xl mx-auto">
-        <InfoSection trip={tripData}/>
-        <Hotels trip={tripData}/>
-        <Place trip={tripData}/>
+    <div className="min-h-screen bg-gray-50">
+      <main className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto space-y-8">
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <InfoSection trip={tripData} />
+          </div>
 
-        <div className="mt-6 flex justify-center">
-          <Link to='/CreateTrip'>
-            <Button>
-                Create Another Trip
-            </Button>
-          </Link>
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <Hotels trip={tripData} />
+          </div>
+
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <Place trip={tripData} />
+          </div>
         </div>
-      </div>
+      </main>
+      <Footer />
     </div>
   )
 }
-
-export default ViewTrip

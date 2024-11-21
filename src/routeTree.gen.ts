@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as CreateTripImport } from './routes/CreateTrip'
 import { Route as IndexImport } from './routes/index'
+import { Route as MyTripsIndexImport } from './routes/MyTrips/index'
 import { Route as ViewTripTripIdIndexImport } from './routes/ViewTrip/$tripId/index'
 
 // Create/Update Routes
@@ -26,6 +27,12 @@ const CreateTripRoute = CreateTripImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const MyTripsIndexRoute = MyTripsIndexImport.update({
+  id: '/MyTrips/',
+  path: '/MyTrips/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,6 +60,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CreateTripImport
       parentRoute: typeof rootRoute
     }
+    '/MyTrips/': {
+      id: '/MyTrips/'
+      path: '/MyTrips'
+      fullPath: '/MyTrips'
+      preLoaderRoute: typeof MyTripsIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/ViewTrip/$tripId/': {
       id: '/ViewTrip/$tripId/'
       path: '/ViewTrip/$tripId'
@@ -68,12 +82,14 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/CreateTrip': typeof CreateTripRoute
+  '/MyTrips': typeof MyTripsIndexRoute
   '/ViewTrip/$tripId': typeof ViewTripTripIdIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/CreateTrip': typeof CreateTripRoute
+  '/MyTrips': typeof MyTripsIndexRoute
   '/ViewTrip/$tripId': typeof ViewTripTripIdIndexRoute
 }
 
@@ -81,27 +97,30 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/CreateTrip': typeof CreateTripRoute
+  '/MyTrips/': typeof MyTripsIndexRoute
   '/ViewTrip/$tripId/': typeof ViewTripTripIdIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/CreateTrip' | '/ViewTrip/$tripId'
+  fullPaths: '/' | '/CreateTrip' | '/MyTrips' | '/ViewTrip/$tripId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/CreateTrip' | '/ViewTrip/$tripId'
-  id: '__root__' | '/' | '/CreateTrip' | '/ViewTrip/$tripId/'
+  to: '/' | '/CreateTrip' | '/MyTrips' | '/ViewTrip/$tripId'
+  id: '__root__' | '/' | '/CreateTrip' | '/MyTrips/' | '/ViewTrip/$tripId/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CreateTripRoute: typeof CreateTripRoute
+  MyTripsIndexRoute: typeof MyTripsIndexRoute
   ViewTripTripIdIndexRoute: typeof ViewTripTripIdIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CreateTripRoute: CreateTripRoute,
+  MyTripsIndexRoute: MyTripsIndexRoute,
   ViewTripTripIdIndexRoute: ViewTripTripIdIndexRoute,
 }
 
@@ -117,6 +136,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/CreateTrip",
+        "/MyTrips/",
         "/ViewTrip/$tripId/"
       ]
     },
@@ -125,6 +145,9 @@ export const routeTree = rootRoute
     },
     "/CreateTrip": {
       "filePath": "CreateTrip.jsx"
+    },
+    "/MyTrips/": {
+      "filePath": "MyTrips/index.jsx"
     },
     "/ViewTrip/$tripId/": {
       "filePath": "ViewTrip/$tripId/index.jsx"
