@@ -1,0 +1,35 @@
+import {GoogleGenerativeAI} from "@google/generative-ai";
+  
+  const apiKey = import.meta.env.VITE_GOOGLE_GEMINI_AI_API_KEY;
+  const genAI = new GoogleGenerativeAI(apiKey);
+  
+  const model = genAI.getGenerativeModel({
+    model: "gemini-1.5-pro-002",
+  });
+  
+  const generationConfig = {
+    temperature: 1,
+    topP: 0.95,
+    topK: 40,
+    maxOutputTokens: 8192,
+    responseMimeType: "application/json",
+  };
+  
+  
+    export const chatSession = model.startChat({
+      generationConfig,
+      history: [
+        {
+          role: "user",
+          parts: [
+            {text: "generate Travel Plan for location :Las Vegas,for 3 days for a couple with a cheap budget ,give me a Hotels options list with HotelName,Hotel address,Price ,hotel image url ,geo coordinates ,rating ,descriptions, and suggest itinerary with PlaceName,PlaceDetails,Place Image Url,Geo Coordinates,ticket Pricing,rating,Time travel each of location for 3 days with each day plan with best time to visit in JSON Format. give me all data in online please without replace or anything please and replace as you like others prices or images .... "},
+          ],
+        },
+        {
+          role: "model",
+          parts: [
+            {text: "```json\n{\n  \"TripDetails\": {\n    \"Destination\": \"Las Vegas, Nevada\",\n    \"Duration\": \"3 Days\",\n    \"Budget\": \"Budget-Friendly\",\n    \"Travelers\": \"Couple\"\n  },\n  \"Hotels\": [\n    {\n      \"HotelName\": \"Excalibur Hotel & Casino\",\n      \"HotelAddress\": \"3850 S Las Vegas Blvd, Las Vegas, NV 89109\",\n      \"Price\": \"From $30/night (prices vary)\",\n      \"HotelImageUrl\": \"https://www.excalibur.com/content/dam/excalibur/hotel/property/facade-night-16x9.jpg/_jcr_content/renditions/cq5dam.thumbnail.1440.960.jpg\",\n      \"GeoCoordinates\": {\n        \"Latitude\": 36.0954,\n        \"Longitude\": -115.1762\n      },\n      \"Rating\": 3.5,\n      \"Description\": \"Medieval-themed hotel and casino with affordable rooms and various entertainment options.\"\n    },\n    {\n      \"HotelName\": \"Luxor Hotel and Casino\",\n      \"HotelAddress\": \"3900 S Las Vegas Blvd, Las Vegas, NV 89119\",\n      \"Price\": \"From $40/night (prices vary)\",\n      \"HotelImageUrl\": \"https://www.luxor.com/content/dam/luxor/property/hotel/exterior/luxor-exterior-night-01.jpg\",\n      \"GeoCoordinates\": {\n        \"Latitude\": 36.0935,\n        \"Longitude\": -115.1763\n      },\n      \"Rating\": 3.5,\n      \"Description\": \"Iconic pyramid-shaped hotel with affordable rooms, a casino, and various dining options.\"\n    },\n    {\n      \"HotelName\": \"Circus Circus Hotel, Casino & Theme Park\",\n      \"HotelAddress\": \"2880 S Las Vegas Blvd, Las Vegas, NV 89109\",\n      \"Price\": \"From $35/night (prices vary)\",\n      \"HotelImageUrl\": \"https://www.circuscircus.com/content/dam/circus/property/exterior/circus-property-exterior-aerial-01.jpeg\",\n      \"GeoCoordinates\": {\n        \"Latitude\": 36.12,\n        \"Longitude\": -115.16\n      },\n\n      \"Rating\": 3,\n      \"Description\": \"Family-friendly hotel with a casino, circus acts, and an indoor amusement park.\"\n    }\n\n    // Add more budget hotel options here if needed\n  ],\n\n\n  \"Itinerary\": {\n    \"Day1\": {\n      \"BestTimeToVisit\": \"Afternoon and Evening\",\n      \"Plan\": [\n        {\n          \"PlaceName\": \"Welcome to Las Vegas Sign\",\n          \"PlaceDetails\": \"Iconic photo opportunity.\",\n          \"PlaceImageUrl\": \"https://i0.wp.com/blog.vegas.com/wp-content/uploads/2019/06/las-vegas-sign-wide-2.jpeg?fit=1024%2C576&ssl=1\",\n          \"GeoCoordinates\": {\n            \"Latitude\": 36.08,\n            \"Longitude\": -115.17\n          },\n          \"TicketPricing\": \"Free\",\n          \"Rating\": 4.5,\n          \"TimeTravel\": \"1 Hour\"\n        },\n        {\n          \"PlaceName\": \"Fremont Street Experience\",\n          \"PlaceDetails\": \"Downtown Las Vegas' pedestrian mall with a light show.\",\n          \"PlaceImageUrl\": \"https://www.vegasexperience.com/wp-content/uploads/2017/05/Slotzilla_Main.jpg\",\n          \"GeoCoordinates\": {\n            \"Latitude\": 36.17,\n            \"Longitude\": -115.14\n          },\n          \"TicketPricing\": \"Free (shows)\",\n          \"Rating\": 4,\n          \"TimeTravel\": \"2-3 Hours\"\n        },\n        {\n          \"PlaceName\": \"High Roller Observation Wheel\",\n          \"PlaceDetails\": \"Giant Ferris wheel with panoramic views.\",\n          \"PlaceImageUrl\": \"https://assets.simpleviewinc.com/sites/caesars/image/fetch/c_limit,f_auto,q_auto:eco,w_750/https://assets.simpleview-content.com/simpleview/image/upload/crm/lasvegas/High-Roller-Evening_d0c1eb7a-b5de-4a05-8605-907b4623d76a.jpg\",\n          \"GeoCoordinates\": {\n            \"Latitude\": 36.11,\n            \"Longitude\": -115.17\n          },\n          \"TicketPricing\": \"From $30 (prices vary)\",\n          \"Rating\": 4.5,\n          \"TimeTravel\": \"1-2 Hours\"\n        }\n      ]\n    },\n\n\n\n\n    \"Day2\": {\n      \"BestTimeToVisit\": \"Daytime\",\n      \"Plan\": [\n        {\n          \"PlaceName\": \"Red Rock Canyon National Conservation Area\",\n          \"PlaceDetails\": \"Hiking and scenic drives.\",\n          \"PlaceImageUrl\": \"https://www.redrockcanyonlv.org/wp-content/uploads/2019/12/DSC_2666-scaled.jpg\",\n          \"GeoCoordinates\": {\n            \"Latitude\": 36.08,\n            \"Longitude\": -115.42\n          },\n          \"TicketPricing\": \"$15 per vehicle\",\n          \"Rating\": 4.5,\n          \"TimeTravel\": \"Half-Day or Full-Day\"\n        }\n      ]\n    },\n\n    \"Day3\": {\n      \"BestTimeToVisit\": \"Anytime\",\n      \"Plan\": [\n        {\n          \"PlaceName\": \"The Strip (Las Vegas Boulevard)\",\n          \"PlaceDetails\": \"Walk the Strip, explore themed hotels, and catch free shows.\",\n          \"PlaceImageUrl\": \"https://www.visitlasvegas.com/-/media/images/visitlasvegas/content-hub/hero-shot/las-vegas-strip-night.jpg?la=en&hash=8A46079AFD19665A646D6DC658755343D657454F\",\n          \"GeoCoordinates\": {\n            \"Latitude\": 36.11,\n            \"Longitude\": -115.17\n          },\n          \"TicketPricing\": \"Free (walking, window shopping)\",\n          \"Rating\": 4,\n          \"TimeTravel\": \"Half-Day or Full-Day\"\n        },\n\n        {\n          \"PlaceName\": \"Bellagio Conservatory & Botanical Garden\",\n          \"PlaceDetails\": \"Stunning floral displays.\",\n          \"PlaceImageUrl\": \"https://www.bellagio.com/content/dam/bellagio/property/amenities/conservatory-botanical-garden/bellagio-conservatory-botanical-garden-winter-display-exterior-wide-shot-16x9.jpg\",\n          \"GeoCoordinates\": {\n            \"Latitude\": 36.11,\n            \"Longitude\": -115.17\n          },\n          \"TicketPricing\": \"Free\",\n          \"Rating\": 4.5,\n          \"TimeTravel\": \"1-2 Hours\"\n        }\n      ]\n    }\n  }\n}\n```"},
+          ],
+        },
+      ],
+    });

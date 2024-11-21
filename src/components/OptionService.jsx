@@ -9,9 +9,9 @@ const OptionService = ({ title, options, onSelect, selectedValue }) => {
           <div
             key={index}
             className={`p-4 border rounded-lg cursor-pointer hover:shadow-lg ${
-              selectedValue === item.title ? 'border-blue-500 bg-blue-50' : ''
+              selectedValue === (item.people || item.title) ? 'border-blue-500 bg-blue-50' : ''
             }`}
-            onClick={() => onSelect(item.title)}
+            onClick={() => onSelect(item.people || item.title)}
           >
             <div className="text-2xl mb-2">{item.icon}</div>
             <h2 className="font-bold text-lg">{item.title}</h2>
