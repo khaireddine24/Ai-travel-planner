@@ -40,7 +40,7 @@ Follow these steps to run the project locally:
 
 
 
-<img src='https://github.com/user-attachments/assets/d2bfca3e-797d-409e-a020-f4272e54f777'/><br/>
+<img src='https://github.com/user-attachments/assets/d2bfca3e-797d-409e-a020-f4272e54f777'/><br/><br/>
 <img src='https://github.com/user-attachments/assets/ce241398-2e55-4699-85a8-5eadbcdd42cc' /><br/>
 <img src='https://github.com/user-attachments/assets/9d8efbee-fdc0-428f-8ca6-aba9ffd90102' /><br/>
 <img src='https://github.com/user-attachments/assets/ff907830-6d27-4fe2-af1d-47cc56ad8d37' /><br/>
