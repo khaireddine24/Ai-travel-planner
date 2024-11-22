@@ -86,8 +86,8 @@ function MyTrips() {
           <h1 className="font-bold text-3xl text-gray-900 dark:text-white">
             My Trips
           </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            {filteredTrips.length} trips found
+          <p className="text-md text-gray-500 dark:text-gray-400">
+          🛫{filteredTrips.length} trips found
           </p>
         </div>
 
