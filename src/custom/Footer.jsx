@@ -5,7 +5,7 @@ const Footer = () => {
   const { user } = useUser()
 
   return (
-    <footer className="bg-white border-t mt-12">
+    <footer className="bg-white dark:bg-gray-900 border-t dark:border-gray-800 mt-12">
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col items-center justify-center space-y-4">
           <div className="flex items-center space-x-2">
@@ -16,19 +16,19 @@ const Footer = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <p className="text-gray-600">
-              Created by <span className="font-medium text-gray-900">{user?.fullName}</span>
+            <p className="text-gray-600 dark:text-gray-400">
+              Created by <span className="font-medium text-gray-900 dark:text-white">{user?.fullName}</span>
             </p>
           </div>
 
-          <div className="text-sm text-gray-500 text-center">
+          <div className="text-sm text-gray-500 dark:text-gray-400 text-center">
             <p>Plan your perfect trip with TravelPlan</p>
             <p>© {new Date().getFullYear()} TravelPlan. All rights reserved.</p>
           </div>
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

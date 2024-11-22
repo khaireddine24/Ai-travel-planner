@@ -1,12 +1,14 @@
 import './index.css'
-import { StrictMode } from 'react'
+import { StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from '../App';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ClerkProvider } from '@clerk/clerk-react'
 import { shadesOfPurple } from '@clerk/themes';
 import { Toaster } from 'sonner';
+import { ThemeProvider } from './context/ThemeContext';
 import ErrorBoundary from './error/ErrorBoundary';
+import Spinner from './components/Spinner';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,6 +22,7 @@ const queryClient = new QueryClient({
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+      <Suspense fallback={<Spinner text={'Loading ...'}/>}>
       <ClerkProvider 
         publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}
         appearance={{
@@ -31,10 +34,13 @@ createRoot(document.getElementById('root')).render(
       >
         <QueryClientProvider client={queryClient}>
           <ErrorBoundary>
-            <App />
+            <ThemeProvider>
+              <App />
+            </ThemeProvider>
             <Toaster position='top-center'/>
           </ErrorBoundary>
         </QueryClientProvider>
       </ClerkProvider>
+      </Suspense>
   </StrictMode>,
 )

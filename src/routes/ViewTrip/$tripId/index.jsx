@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { createFileRoute, useParams, useNavigate, Link } from '@tanstack/react-router'
+import { createFileRoute, useParams, useNavigate } from '@tanstack/react-router'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '@/service/firebaseConfig'
-import { Loader} from 'lucide-react'
 import { toast } from 'sonner'
 import InfoSection from '@/components/InfoSection'
 import Hotels from '@/components/Hotels'
 import Place from '@/components/Place'
 import Footer from '@/custom/Footer'
+import Spinner from '@/components/Spinner'
 
 export const Route = createFileRoute('/ViewTrip/$tripId/')({
   component: ViewTrip,
@@ -45,10 +45,7 @@ function ViewTrip() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
-        <Loader className="animate-spin w-12 h-12 text-blue-500" />
-        <p className="mt-4 text-gray-600">Loading your trip details...</p>
-      </div>
+        <Spinner text={'Loading your trip details...'}/>
     )
   }
 
@@ -57,18 +54,18 @@ function ViewTrip() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen mt-2 bg-gray-50 dark:bg-gray-900">
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto space-y-8">
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-white dark:bg-gray-800  rounded-xl shadow-sm p-6">
             <InfoSection trip={tripData} />
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
             <Hotels trip={tripData} />
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
             <Place trip={tripData} />
           </div>
         </div>

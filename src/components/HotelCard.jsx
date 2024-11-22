@@ -7,7 +7,7 @@ const HotelCard = ({ hotel, imageUrl }) => (
     target='_blank'
     className='block'
   >
-    <div className='hover:scale-105 transition-all cursor-pointer bg-white rounded-xl shadow-md overflow-hidden'>
+    <div className='hover:scale-105 transition-all cursor-pointer bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden'>
       <img 
         src={imageUrl || '/travel-plane.jpg'} 
         alt={hotel.HotelName}
@@ -16,7 +16,7 @@ const HotelCard = ({ hotel, imageUrl }) => (
       <div className='p-4'>
         <h3 className='font-semibold text-lg mb-1'>{hotel.HotelName}</h3>
         <div className='space-y-1'>
-          <p className='text-sm text-gray-600 flex items-center'>
+          <p className='text-sm text-gray-600 dark:text-gray-400 flex items-center'>
             <span className='mr-2'>📍</span>
             {hotel.HotelAddress}
           </p>

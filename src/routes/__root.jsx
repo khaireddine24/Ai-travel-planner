@@ -4,7 +4,7 @@ import Header from '@/custom/Header'
 
 export const Route = createRootRoute({
   component: () => (
-    <div>
+    <div className='dark:bg-gray-900'>
       <Header />
       <Outlet />
     </div>

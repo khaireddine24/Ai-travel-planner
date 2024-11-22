@@ -170,17 +170,19 @@ function CreateTrip() {
   
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-2xl mx-auto">
-        <h2 className="text-3xl font-bold mb-4">Plan Your Perfect Trip 🌍✈️</h2>
-        <p className="text-gray-600 mb-8">
+    <div className="container mx-auto px-4 py-8 mt-2 dark:bg-gray-900">
+      <div className="max-w-2xl mx-auto ">
+        <h2 className="text-3xl font-bold mb-4 dark:text-white">
+          Plan Your Perfect Trip 🌍✈️
+        </h2>
+        <p className="text-gray-600 dark:text-gray-300 mb-8">
           Share your travel preferences, and let us craft a personalized
           itinerary for you.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-xl font-semibold mb-3">Destination</h3>
+            <h3 className="text-xl font-semibold mb-3 dark:text-white">Destination</h3>
             <Combobox
               options={destinations}
               value={searchTerm}
@@ -191,7 +193,7 @@ function CreateTrip() {
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-3">Trip Duration</h3>
+            <h3 className="text-xl font-semibold mb-3 dark:text-white">Trip Duration</h3>
             <Input
               type="number"
               placeholder="Number of days"
@@ -199,6 +201,7 @@ function CreateTrip() {
               onChange={(e) => handleInputChange('nbOfDays', e.target.value)}
               min="1"
               max="30"
+              className="dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:placeholder-gray-400"
             />
           </div>
 
@@ -220,7 +223,7 @@ function CreateTrip() {
             <Button
               onClick={OnGenerateTrips}
               disabled={isLoading}
-              className="w-full sm:w-auto"
+              className="w-full sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700"
             >
               {isLoading ? (
                 <div className="flex items-center gap-2">
