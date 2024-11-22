@@ -64,7 +64,6 @@ function MyTrips() {
   const handleDeleteTrip = (deletedTripId) => {
     const updatedTrips = trips.filter(trip => trip.id !== deletedTripId);
     setTrips(updatedTrips);
-    toast.success('Trip deleted successfully');
   };
 
   const filteredTrips = filterTrips(trips, filters);

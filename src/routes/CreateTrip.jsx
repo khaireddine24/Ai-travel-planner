@@ -5,7 +5,7 @@ import debounce from 'lodash.debounce';
 import { useQuery } from '@tanstack/react-query';
 import { Combobox } from '@/components/combobox';
 import { Input } from '@/components/ui/input';
-import OptionService from '@/components/optionService';
+import OptionService from '@/components/OptionService';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { Loader } from 'lucide-react';
