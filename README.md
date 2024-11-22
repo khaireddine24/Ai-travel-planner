@@ -31,12 +31,12 @@ Follow these steps to run the project locally:
 4. Open the app in your browser:
    http://localhost:5173
 
-<b>Usage</b>
+## <b>Usage</b>
 1. Sign up or log in to your account.
 2. Create your travel preferences and interests.
 3. Explore AI-generated itineraries and recommendations.
 
-<b>Screenshots<b>
+## <b>Screenshots<b>
 
 
 
