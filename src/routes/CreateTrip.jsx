@@ -258,7 +258,7 @@ function CreateTrip() {
             <Button
               onClick={OnGenerateTrips}
               disabled={isLoading}
-              className="w-full sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700"
+              className="w-full sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-800 dark:text-white"
             >
               {isLoading ? (
                 <div className="flex items-center gap-2">
