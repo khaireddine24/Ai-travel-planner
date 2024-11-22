@@ -10,10 +10,14 @@ Experience the future of travel planning! The AI Trip Planner leverages advanced
 - 🎨 **Responsive Design**: Optimized for all devices with a sleek, modern interface powered by TailwindCSS.  
 
 ## Tech Stack  
-- **Frontend**: React+vite, TailwindCSS  
-- **AI**: Gemini AI for natural language processing and smart recommendations  
-- **Backend**: Firebase for real-time database and authentication  
-- **Hosting**: Firebase Hosting  
+- **Frontend**: React+vite, TailwindCSS,shadcn  
+- **AI**: Gemini AI for natural language processing and smart recommendations
+- **Authentication**: Clerk for secure user authentication and account management  
+- **Backend**: Firebase for real-time database
+- **APIs**:  
+  - **Unsplash API**: For fetching stunning images of destinations.  
+  - **Geoapify API**: For geolocation and interactive mapping features.
+- **Hosting**: Vercel  
 
 ## Installation  
 Follow these steps to run the project locally:  
