@@ -19,7 +19,7 @@ Experience the future of travel planning! The AI Trip Planner leverages advanced
 Follow these steps to run the project locally:  
 
 1. Clone the repository:  
-   git clone https://github.com/khaireddine24/Ai-travel-planner.git
+   git clone https://github.com/khaireddine24/Ai-travel-planner.git <br/>
    cd ai-trip-planner
    
 2. Install dependencies:
