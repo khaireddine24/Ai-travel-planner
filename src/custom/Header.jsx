@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useUser, SignInButton, UserButton } from '@clerk/clerk-react';
 import { Link, useRouterState } from '@tanstack/react-router';
 import { Home, PlaneTakeoff, MapPin, User, Menu, X } from 'lucide-react';
@@ -7,47 +8,72 @@ import { useState } from 'react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
 const Header = () => {
-  const { isSignedIn } = useUser();
+  const { isSignedIn,user } = useUser();
   const routerState = useRouterState();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isActive = (path) => routerState.location.pathname === path;
 
   const NavLinks = () => (
-    <>
-      <Link 
-        to="/" 
-        className={`flex items-center space-x-2 px-3 py-2 rounded-md transition-colors ${
-          isActive('/') 
-            ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' 
-            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-        }`}
-      >
-        <Home size={20} />
-        <span>Home</span>
-      </Link>
-      <Link 
-        to="/CreateTrip" 
-        className={`flex items-center space-x-2 px-3 py-2 rounded-md transition-colors ${
-          isActive('/CreateTrip') 
-            ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' 
-            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-        }`}
-      >
-        <PlaneTakeoff size={20} />
-        <span>Create Trip</span>
-      </Link>
-      <Link 
-        to="/MyTrips" 
-        className={`flex items-center space-x-2 px-3 py-2 rounded-md transition-colors ${
-          isActive('/MyTrips') 
-            ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' 
-            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-        }`}
-      >
-        <MapPin size={20} />
-        <span>My Trips</span>
-      </Link>
-    </>
+    <TooltipProvider>
+      <>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link 
+              to="/" 
+              className={`flex items-center space-x-2 px-3 py-2 rounded-md transition-colors ${
+                isActive('/') 
+                  ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' 
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+              }`}
+            >
+              <Home size={20} />
+              <span>Home</span>
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">
+            <p>Home Page</p>
+          </TooltipContent>
+        </Tooltip>
+
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link 
+              to="/CreateTrip" 
+              className={`flex items-center space-x-2 px-3 py-2 rounded-md transition-colors ${
+                isActive('/CreateTrip') 
+                  ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' 
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+              }`}
+            >
+              <PlaneTakeoff size={20} />
+              <span>Create Trip</span>
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">
+            <p>Plan a New Trip</p>
+          </TooltipContent>
+        </Tooltip>
+
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link 
+              to="/MyTrips" 
+              className={`flex items-center space-x-2 px-3 py-2 rounded-md transition-colors ${
+                isActive('/MyTrips') 
+                  ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' 
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+              }`}
+            >
+              <MapPin size={20} />
+              <span>My Trips</span>
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">
+            <p>Saved Trips</p>
+          </TooltipContent>
+        </Tooltip>
+      </>
+    </TooltipProvider>
   );
 
   return (
@@ -71,10 +97,20 @@ const Header = () => {
             <div className='flex items-center space-x-4'>
               <NavLinks />
               <ThemeToggle />
-              <UserButton />
+              <div className="w-12 h-12">
+                <UserButton
+                  appearance={{
+                    elements: {
+                      userButtonAvatarBox: "w-full h-full",
+                      userButtonTrigger: "w-full h-full"
+                    }
+                  }}
+                />
+              </div>
             </div>
           ) : (
             <>
+              <NavLinks />
               <ThemeToggle />
               <SignInButton mode="modal">
                 <Button variant="outline" className='flex items-center space-x-2 dark:border-gray-700 dark:text-gray-300'>
@@ -98,13 +134,30 @@ const Header = () => {
       </div>
 
       {mobileMenuOpen && (
-        <div className='md:hidden absolute left-0 right-0 bg-white dark:bg-gray-900 shadow-lg dark:shadow-gray-800'>
+        <div className='md:hidden absolute left-0 right-0 bg-white dark:bg-gray-900 shadow-lg dark:shadow-gray-800 z-50'>
           <nav className='flex flex-col p-4 space-y-2'>
             {isSignedIn ? (
               <>
                 <NavLinks />
-                <div className='pt-2 border-t dark:border-gray-700'>
-                  <UserButton />
+                <div className='pt-2 border-t dark:border-gray-700 flex items-center space-x-3'>
+                  <div className="w-12 h-12 flex-shrink-0">
+                    <UserButton
+                      appearance={{
+                        elements: {
+                          userButtonAvatarBox: "w-full h-full",
+                          userButtonTrigger: "w-full h-full"
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="flex-grow">
+                    <p className="text-sm font-medium text-gray-800 dark:text-white">
+                      {user.fullName || user.primaryEmailAddress.emailAddress}
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      {user.primaryEmailAddress.emailAddress}
+                    </p>
+                  </div>
                 </div>
               </>
             ) : (

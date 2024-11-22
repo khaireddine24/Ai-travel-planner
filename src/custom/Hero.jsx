@@ -8,7 +8,7 @@ import GradientBackground from '@/components/GradientBackground';
 
 const Hero = () => {
   return (
-    <div className="min-h-screen dark:bg-gray-900">
+    <div className="min-h-screen dark:bg-gray-900 mt-2">
       <GradientBackground>
         <div className="container mx-auto px-4 pt-24 pb-20">
           <div className="flex flex-col items-center gap-8 max-w-4xl mx-auto text-center relative">
@@ -28,16 +28,16 @@ const Hero = () => {
               <Link to="/CreateTrip">
                 <Button
                   size="lg"
-                  className="bg-[#f56551] hover:bg-[#e54531] shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
+                  className="bg-[#f56551] hover:bg-[#e54531] text-white shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
                 >
                   Start Planning Free
                 </Button>
               </Link>
-              <Link to="/examples">
+              <Link to="/ExampleTrips">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-2 bg-white hover:bg-gray-50 dark:border-gray-600 dark:text-black dark:hover:bg-gray-800 w-full sm:w-auto"
+                  className="border-2 bg-white hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-400 dark:text-black w-full sm:w-auto"
                 >
                   View Sample Trips
                 </Button>
@@ -77,7 +77,7 @@ const Hero = () => {
             <Link to="/CreateTrip">
               <Button
                 size="lg"
-                className="bg-white text-[#f56551] hover:bg-gray-100 dark:hover:bg-gray-200 shadow-lg hover:shadow-xl transition-all"
+                className="bg-white text-black hover:bg-gray-100 dark:hover:bg-gray-200 shadow-lg hover:shadow-xl transition-all"
               >
                 Create Your Perfect Trip
               </Button>

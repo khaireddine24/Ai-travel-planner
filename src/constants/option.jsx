@@ -112,4 +112,58 @@ export const StatDetails=[
     { number: "24/7", label: "AI Support" },
   ];
 
+export const exampleTrips = [
+    {
+      id: 1,
+      title: "Cultural Tour of Japan",
+      description: "A 10-day journey through Tokyo, Kyoto, and Osaka, exploring temples, modern culture, and culinary delights.",
+      duration: "10 days",
+      destinations: ["Tokyo", "Kyoto", "Osaka"],
+      bestFor: ["Culture lovers", "Foodies", "First-time visitors"],
+      season: "Spring (Cherry Blossom)",
+      image: "images/japan.jpg",
+      budget: "$3,000 - $4,000",
+      highlights: [
+        "Tea ceremony in Kyoto",
+        "Tsukiji Fish Market tour",
+        "Mount Fuji day trip",
+        "Traditional ryokan stay"
+      ]
+    },
+    {
+      id: 2,
+      title: "Mediterranean Adventure",
+      description: "Experience the best of Greece and Italy in this 14-day Mediterranean exploration combining history, beaches, and cuisine.",
+      duration: "14 days",
+      destinations: ["Rome", "Athens", "Santorini"],
+      bestFor: ["History buffs", "Beach lovers", "Couples"],
+      season: "Summer",
+      image: "images/roma.jpg",
+      budget: "$4,500 - $5,500",
+      highlights: [
+        "Colosseum guided tour",
+        "Santorini sunset cruise",
+        "Athens food tour",
+        "Italian cooking class"
+      ]
+    },
+    {
+      id: 3,
+      title: "Costa Rica Eco-Adventure",
+      description: "An 8-day sustainable travel experience combining rainforest adventures, wildlife spotting, and beach relaxation.",
+      duration: "8 days",
+      destinations: ["Manuel Antonio", "Arenal", "Tamarindo"],
+      bestFor: ["Nature lovers", "Adventure seekers", "Eco-tourists"],
+      season: "Dry Season (Dec-Apr)",
+      image: "images/costaRica.jpg",
+      budget: "$2,500 - $3,500",
+      highlights: [
+        "Rainforest zip-lining",
+        "Sloth sanctuary visit",
+        "Volcano hot springs",
+        "Surfing lessons"
+      ]
+    }
+  ];
+
 export const AI_PROMPT="generate Travel Plan for location :{location},for {totalDays} days for {travelWith} with a {budget} budget ,give me a Hotels options list with HotelName,Hotel address,Price ,hotel image url ,geo coordinates ,rating ,descriptions, and suggest itinerary with PlaceName,PlaceDetails,Place Image Url,Geo Coordinates,ticket Pricing,rating,Time travel each of location for {totalDays} days with each day plan with best time to visit in JSON Format."

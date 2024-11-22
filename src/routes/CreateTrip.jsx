@@ -99,6 +99,23 @@ function CreateTrip() {
     }
   };
 
+  const sanitizeJsonResponse = (response) => {
+    try {
+      const jsonStartIndex = response.indexOf('{');
+      const jsonEndIndex = response.lastIndexOf('}') + 1;
+      
+      if (jsonStartIndex !== -1 && jsonEndIndex !== -1) {
+        const sanitizedJson = response.slice(jsonStartIndex, jsonEndIndex);
+        return sanitizedJson;
+      }
+      
+      return '{}';
+    } catch (error) {
+      console.error('Sanitization error:', error);
+      return '{}';
+    }
+  };
+
   const saveUserTrip = async (tripData, tripDetails) => {
     try {
       const docId = Date.now().toString();
@@ -144,7 +161,26 @@ function CreateTrip() {
         .replace('{budget}', budget);
   
       const res = await chatSession.sendMessage(prompt);
-      const tripDetails = JSON.parse(res?.response?.text() || '{}');
+      const rawResponse = res?.response?.text() || '{}';
+      
+      console.log('Raw AI Response:', rawResponse);
+      
+      let tripDetails = {};
+      try {
+        const sanitizedResponse = sanitizeJsonResponse(rawResponse);
+        tripDetails = JSON.parse(sanitizedResponse);
+      } catch (parseError) {
+        console.error('JSON Parsing Error:', parseError);
+        
+        tripDetails = {
+          hotels: [],
+          itinerary: [],
+          recommendations: []
+        };
+        
+        toast.warning('Could not parse full trip details. Using default structure.');
+      }
+  
       const hotels = tripDetails.hotels || [];
   
       const tripData = {
@@ -167,7 +203,6 @@ function CreateTrip() {
       setIsLoading(false);
     }
   };
-  
 
   return (
     <div className="container mx-auto px-4 py-8 mt-2 dark:bg-gray-900">
