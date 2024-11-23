@@ -30,7 +30,7 @@ Follow these steps to run the project locally:
    npm i
 
 3. Run the app:
-   npm start
+   npm run dev
 
 4. Open the app in your browser:
    http://localhost:5173
