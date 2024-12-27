@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
 const Header = () => {
-  const { isSignedIn,user } = useUser();
+  const { isSignedIn, user } = useUser();
   const routerState = useRouterState();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isActive = (path) => routerState.location.pathname === path;
@@ -54,24 +54,26 @@ const Header = () => {
           </TooltipContent>
         </Tooltip>
 
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Link 
-              to="/MyTrips" 
-              className={`flex items-center space-x-2 px-3 py-2 rounded-md transition-colors ${
-                isActive('/MyTrips') 
-                  ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' 
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-              }`}
-            >
-              <MapPin size={20} />
-              <span>My Trips</span>
-            </Link>
-          </TooltipTrigger>
-          <TooltipContent side="bottom">
-            <p>Saved Trips</p>
-          </TooltipContent>
-        </Tooltip>
+        {isSignedIn && (
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link 
+                to="/MyTrips" 
+                className={`flex items-center space-x-2 px-3 py-2 rounded-md transition-colors ${
+                  isActive('/MyTrips') 
+                    ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' 
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                }`}
+              >
+                <MapPin size={20} />
+                <span>My Trips</span>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Saved Trips</p>
+            </TooltipContent>
+          </Tooltip>
+        )}
       </>
     </TooltipProvider>
   );
